@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | NROCKS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body id="top" class="checkout-page">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-social" aria-label="Social media links">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="YouTube">▶</a>
+          <a href="#" aria-label="Instagram">◎</a>
+        </div>
+        <div class="topbar-utility">
+          <a class="topbar-pill" href="index.html#visit">Hours</a>
+          <a class="topbar-pill" href="mailto:Contact@NRocks.com">Contact Us</a>
+        </div>
+      </div>
+    </header>
+
+    <header class="main-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html#top">
+          <img
+            src="https://nrocks.com/wp-content/uploads/2023/12/NROCKS_no-VA-tag_CYMK-1.png"
+            alt="NROCKS"
+          />
+        </a>
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation">Menu</button>
+        <nav id="site-nav" class="site-nav">
+          <div class="nav-dropdown">
+            <button class="nav-dropbtn" type="button">Activities</button>
+            <div class="nav-dropdown-menu">
+              <a href="activity-via-ferrata.html">Via Ferrata</a>
+              <a href="activity-via-ferrata.html">Via Ferrata Full Moon Tour</a>
+              <a href="activity-zip-line.html">Zip Line Canopy Tour</a>
+              <a href="activity-top-ropes.html">Top Ropes Climbing</a>
+            </div>
+          </div>
+          <a href="location-directions.html">Location &amp; Directions</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropbtn" type="button">Lodging</button>
+            <div class="nav-dropdown-menu">
+              <a href="lodging-tent-camping.html">Camping Tent</a>
+              <a href="lodging-cabin-rental.html">Cabin Rental</a>
+              <a href="lodging-yellow-house-inn.html">Yellow House Inn</a>
+              <a href="lodging-guest-room.html">Guest Room</a>
+            </div>
+          </div>
+          <a href="index.html#visit">Plan Your Visit</a>
+          <a href="index.html#about">About Us</a>
+          <a href="index.html#camps">Camps</a>
+          <a class="btn btn-small" href="booking.html">Book Now</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="section checkout-section">
+      <div class="container">
+        <h1>Checkout</h1>
+        <p class="lead">Review your trip, enter contact information, and pay to reserve your spots.</p>
+
+        <div class="checkout-layout">
+          <div class="checkout-summary-col">
+            <h2>Order summary</h2>
+            <div id="checkout-summary"></div>
+          </div>
+
+          <div class="checkout-form-col">
+            <div id="checkout-status" class="booking-status" role="status"></div>
+
+            <form id="checkout-form" class="checkout-form" novalidate>
+              <h2>Contact</h2>
+              <label class="control">
+                Full name
+                <input id="checkout-name" name="name" type="text" autocomplete="name" required />
+              </label>
+              <label class="control">
+                Phone
+                <input id="checkout-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required />
+              </label>
+              <label class="control">
+                Email (confirmation)
+                <input id="checkout-email" name="email" type="email" autocomplete="email" required />
+              </label>
+              <label class="control control-checkbox control-span-full">
+                <span class="checkbox-row">
+                  <input id="checkout-marketing" name="marketing" type="checkbox" />
+                  <span>
+                    I’m okay receiving promotional offers and occasional surveys from NROCKS by
+                    email.
+                  </span>
+                </span>
+              </label>
+
+              <h2 class="checkout-payment-heading">Payment</h2>
+              <p class="muted-help checkout-payment-note">
+                Demo only — card data is not processed or stored. Use test numbers for practice.
+              </p>
+              <label class="control">
+                Name on card
+                <input id="checkout-card-name" name="card-name" type="text" autocomplete="cc-name" required />
+              </label>
+              <label class="control">
+                Card number
+                <input
+                  id="checkout-card-number"
+                  name="card-number"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="cc-number"
+                  placeholder="1234 5678 9012 3456"
+                  required
+                />
+              </label>
+              <div class="checkout-form-row">
+                <label class="control">
+                  Expires (MM/YY)
+                  <input
+                    id="checkout-card-exp"
+                    name="card-exp"
+                    type="text"
+                    autocomplete="cc-exp"
+                    placeholder="08/27"
+                    required
+                  />
+                </label>
+                <label class="control">
+                  CVV
+                  <input
+                    id="checkout-card-cvv"
+                    name="card-cvv"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="cc-csc"
+                    placeholder="123"
+                    required
+                  />
+                </label>
+              </div>
+              <label class="control">
+                Billing ZIP
+                <input id="checkout-billing-zip" name="billing-zip" type="text" autocomplete="postal-code" required />
+              </label>
+
+              <button type="submit" class="btn checkout-submit">Pay &amp; reserve</button>
+            </form>
+          </div>
+        </div>
+
+        <aside class="checkout-cancellation" aria-labelledby="checkout-cancellation-heading">
+          <h2 id="checkout-cancellation-heading">Cancellation policy</h2>
+          <p class="checkout-cancellation-intro">
+            Please read before you complete your reservation. By paying, you agree to these terms.
+          </p>
+          <ul class="checkout-cancellation-list">
+            <li>
+              <strong>More than 48 hours before your start time:</strong> You may cancel or reschedule
+              for a full refund or account credit. Contact us by phone or email with your order details.
+            </li>
+            <li>
+              <strong>Within 48 hours of your start time:</strong> Cancellations and no-shows are
+              non-refundable, as guides and capacity are reserved for your group. We may offer a
+              one-time reschedule at our discretion, subject to availability.
+            </li>
+            <li>
+              <strong>Weather and safety:</strong> If NROCKS cancels due to weather or unsafe
+              conditions, you will be offered a reschedule or a full refund — we will contact you using
+              the email or phone number you provide at checkout.
+            </li>
+            <li>
+              <strong>Arrival time:</strong> Please arrive at least 15 minutes before your scheduled
+              start. Late arrivals may not receive a refund if the program has begun without you.
+            </li>
+          </ul>
+          <p class="muted-help checkout-cancellation-footer">
+            Questions? Email <a class="text-link" href="mailto:Contact@NRocks.com">Contact@NRocks.com</a>
+            or call <a class="text-link" href="tel:+15404379901">(540) 437-9901</a>.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
