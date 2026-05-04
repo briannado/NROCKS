@@ -46,6 +46,15 @@ menuToggle?.addEventListener("click", () => {
         siteNav?.classList.remove("open");
       });
     });
+
+    dd.addEventListener("mouseleave", () => {
+      if (!dd.classList.contains("is-open")) return;
+      dd.classList.remove("is-open");
+      setExpanded(dd, false);
+      /* Clicks leave focus inside the nav; :focus-within would keep the menu open until blur */
+      const active = document.activeElement;
+      if (active && typeof active.blur === "function" && dd.contains(active)) active.blur();
+    });
   });
 
   document.addEventListener("click", (e) => {
@@ -56,6 +65,8 @@ menuToggle?.addEventListener("click", () => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeAll();
   });
+
+  window.addEventListener("scroll", closeAll, { passive: true });
 })();
 
 const CART_STORAGE_KEY = "nrocks_cart_v1";
