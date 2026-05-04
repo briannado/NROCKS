@@ -9,6 +9,14 @@ menuToggle?.addEventListener("click", () => {
   const dropdowns = document.querySelectorAll(".nav-dropdown");
   if (!dropdowns.length) return;
 
+  /** Ignore stray scroll/mouseleave right after open (layout / sticky header can fire scroll once). */
+  const OPEN_GUARD_MS = 320;
+  let openGuardUntil = 0;
+
+  function armOpenGuard() {
+    openGuardUntil = Date.now() + OPEN_GUARD_MS;
+  }
+
   function setExpanded(dd, expanded) {
     dd.querySelector(".nav-dropbtn")?.setAttribute("aria-expanded", expanded ? "true" : "false");
   }
@@ -28,6 +36,11 @@ menuToggle?.addEventListener("click", () => {
     btn.setAttribute("aria-haspopup", "true");
     btn.setAttribute("aria-expanded", "false");
 
+    btn.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0) return;
+      if (!dd.classList.contains("is-open")) armOpenGuard();
+    });
+
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -36,6 +49,7 @@ menuToggle?.addEventListener("click", () => {
       if (opening) {
         dd.classList.add("is-open");
         setExpanded(dd, true);
+        armOpenGuard();
       }
     });
 
@@ -48,6 +62,7 @@ menuToggle?.addEventListener("click", () => {
     });
 
     dd.addEventListener("mouseleave", () => {
+      if (Date.now() < openGuardUntil) return;
       if (!dd.classList.contains("is-open")) return;
       dd.classList.remove("is-open");
       setExpanded(dd, false);
@@ -66,7 +81,14 @@ menuToggle?.addEventListener("click", () => {
     if (e.key === "Escape") closeAll();
   });
 
-  window.addEventListener("scroll", closeAll, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (Date.now() < openGuardUntil) return;
+      closeAll();
+    },
+    { passive: true }
+  );
 })();
 
 const CART_STORAGE_KEY = "nrocks_cart_v1";
