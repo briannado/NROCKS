@@ -5,6 +5,59 @@ menuToggle?.addEventListener("click", () => {
   siteNav?.classList.toggle("open");
 });
 
+(function initNavDropdowns() {
+  const dropdowns = document.querySelectorAll(".nav-dropdown");
+  if (!dropdowns.length) return;
+
+  function setExpanded(dd, expanded) {
+    dd.querySelector(".nav-dropbtn")?.setAttribute("aria-expanded", expanded ? "true" : "false");
+  }
+
+  function closeAll() {
+    dropdowns.forEach((dd) => {
+      dd.classList.remove("is-open");
+      setExpanded(dd, false);
+    });
+  }
+
+  dropdowns.forEach((dd) => {
+    const btn = dd.querySelector(".nav-dropbtn");
+    const menu = dd.querySelector(".nav-dropdown-menu");
+    if (!btn || !menu) return;
+
+    btn.setAttribute("aria-haspopup", "true");
+    btn.setAttribute("aria-expanded", "false");
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const opening = !dd.classList.contains("is-open");
+      closeAll();
+      if (opening) {
+        dd.classList.add("is-open");
+        setExpanded(dd, true);
+      }
+    });
+
+    menu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        dd.classList.remove("is-open");
+        setExpanded(dd, false);
+        siteNav?.classList.remove("open");
+      });
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".nav-dropdown")) return;
+    closeAll();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAll();
+  });
+})();
+
 const CART_STORAGE_KEY = "nrocks_cart_v1";
 const BOOKING_STORAGE_KEY = "nrocks_booking_slots_v1";
 const PROMO_CODE_STORAGE_KEY = "nrocks_checkout_promo_code_v1";
